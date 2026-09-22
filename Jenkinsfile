@@ -12,8 +12,7 @@ pipeline {
   }
   post {
     always {
-      junit testResults: 'js-tests/TEST-jest-results.xml',
-            testDataPublishers: [smarttest()]
+      junit testResults: 'js-tests/TEST-jest-results.xml'
     }
   }
 }
