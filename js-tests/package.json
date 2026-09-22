@@ -1,0 +1,22 @@
+{
+  "name": "smart-tests-poc-js",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "jest-junit": "^16.0.0"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      ["jest-junit", {
+        "outputDirectory": ".",
+        "outputName": "TEST-jest-results.xml",
+        "classname": "{filepath}",
+        "suiteName": "jest tests"
+      }]
+    ]
+  }
+}

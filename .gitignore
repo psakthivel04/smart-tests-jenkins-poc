@@ -1,0 +1,7 @@
+/.idea/
+/target/
+/work/
+node_modules/
+.pytest_cache/
+__pycache__/
+TEST-*-results.xml

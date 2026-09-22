@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    POC: reads raw JUnit XML via TestDataPublisher to verify file= attribute presence.
+</div>
