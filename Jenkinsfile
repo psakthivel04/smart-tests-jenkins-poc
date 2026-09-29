@@ -8,13 +8,15 @@ pipeline {
     }
     stage('Jest Tests') {
       steps {
-        wrap([$class: 'SmartTestsSubsetStep',
-              target: 80,
-              framework: 'jest',
-              testPaths: 'js-tests/src/__tests__/**/*.test.js']) {
+        wrap([$class: 'SmartTestsSubsetStep']) {
           dir('js-tests') {
             sh 'npm install'
-            sh 'JEST_JUNIT_CLASSNAME="{filepath}" npm test -- $SMART_TEST_FILTER'
+            sh '''
+              find src/__tests__ -name "*.test.js" \
+                | smart-tests subset --from-jenkins --target 80% --base . jest > filter.txt
+              export SMART_TEST_FILTER=$(cat filter.txt)
+              JEST_JUNIT_CLASSNAME="{filepath}" npm test -- $SMART_TEST_FILTER
+            '''
           }
         }
       }
