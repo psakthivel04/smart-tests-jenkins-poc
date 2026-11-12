@@ -3,7 +3,14 @@ pipeline {
   stages {
     stage('Maven Tests') {
       steps {
-        sh 'mvn test'
+          withSmartTests {
+            sh '''
+              source /Users/psakthivel/IdeaProjects/smart-tests-cli/.venv/bin/activate
+              smart-tests subset --target 80% maven src/test/java > filter.txt
+              cat filter.txt
+              mvn test -Dtest=$(paste -sd, filter.txt)
+            '''
+          }
       }
     }
   }
